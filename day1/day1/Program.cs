@@ -20,7 +20,6 @@ class Program
         Display(vehiclePrice);
         Console.WriteLine();
 
-
         //  Retrieve vehicle models along with their fuel types.
         var modelFuelTypes = vehicles.Select(v => (v.Model, string.Join(", ", v.FuelTypes))).ToList();
         Display(modelFuelTypes);
@@ -55,11 +54,39 @@ class Program
         Console.WriteLine();
 
         //  Count vehicles available in each brand.
+        //var brandCar = vehiclesSorted.Count();
+        var brandCarCount = groupedVehicles.Select(group => new { Brand = group.Key, Count = group.Count() });
+        Display(brandCarCount.ToList());
+        Console.WriteLine();
 
         //  Retrieve vehicles with missing price values.
-        //  Sort vehicles by price, then by brand.
-        //  Find the average price of vehicles in each brand.
-        //  Find the brand with the highest number of vehicles.
+        var nullPrice = vehicles.Where(v => v.Price == null).ToList();
+        Display(nullPrice);
+        Console.WriteLine();
 
+        //  Sort vehicles by price, then by brand.
+        var vehiclesSortPriceBrand = vehicles.OrderByDescending(v => v.Price).OrderBy(v => v.Brand).ToList();
+        Display(vehiclesSortPriceBrand.ToList());
+        Console.WriteLine();
+
+        //  Find the average price of vehicles in each brand.
+        var avgPrice = groupedVehicles
+            .Select(group => new
+            {
+                Brand = group.Key,
+                AveragePrice = group.Where(v => v.Price != null).Any() ? group.Where(v => v.Price != null).Average(v => v.Price) : 0
+            }).ToList();
+        Display(avgPrice);
+        Console.WriteLine();
+
+        //  Find the brand with the highest number of vehicles.
+        var brandCount = groupedVehicles
+            .Select(group => new
+            {
+                Brand = group.Key,
+                count = group.Count()
+            }).ToList();
+        Display(brandCount);
+        Console.WriteLine();
     }
 }
