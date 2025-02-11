@@ -20,4 +20,6 @@ Write LINQ Queries(Using Method & Query syntax) to Solve the Following:
 9. Find the average price of vehicles in each brand.
 10. Find the brand with the highest number of vehicles.
 
-![day1](/img/day1.png)
+![day1_1](/img/day1_1.png)
+![day1_2](/img/day1_2.png)
+
