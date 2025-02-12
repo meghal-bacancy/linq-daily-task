@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
-using day1;
+﻿using day1;
 
 class Program
 {
@@ -50,24 +48,24 @@ class Program
         Console.WriteLine();
 
         //  Find the vehicle with the highest and lowest price.
-        //var HighestPrice = (from v in vehicles select v).Max(e => e.Price);
-        var vehiclesSorted = vehicles.OrderByDescending(v => v.Price);
-        var vehiclesSortedQuery = (from v in vehicles
-                                   orderby v.Price
-                                   select v).ToList();
-
-        var highestPriceVehicle = vehiclesSorted.First();
-        Console.WriteLine(highestPriceVehicle);
-
-        var lowestPriceVehicle = vehiclesSorted.Last();
-        Console.WriteLine(lowestPriceVehicle);
+        var HighestPrice = vehicles
+                                .Where(v => v.Price == vehicles.Max(v => v.Price))
+                                .ToList();
+        var LowestPrice = vehicles
+                                .Where(v => v.Price == vehicles.Min(v => v.Price))
+                                .ToList();
+        Display(HighestPrice);
+        Display(LowestPrice);
         Console.WriteLine();
 
-        var highestPriceVehicleQuery = vehiclesSortedQuery.First();
-        Console.WriteLine(highestPriceVehicle);
-
-        var lowestPriceVehicleQuery = vehiclesSortedQuery.Last();
-        Console.WriteLine(lowestPriceVehicle);
+        var HighestPriceQuery = (from v in vehicles
+                                    where v.Price == vehicles.Max(v => v.Price)
+                                    select v).ToList();
+        var LowestPriceQuery = (from v in vehicles
+                                where v.Price == vehicles.Min(v => v.Price)
+                                select v).ToList();
+        Display(HighestPriceQuery);
+        Display(LowestPriceQuery);
         Console.WriteLine();
 
         //  Group vehicles by brand.
@@ -116,8 +114,8 @@ class Program
         //  Retrieve vehicles with missing price values.
         var nullPrice = vehicles.Where(v => v.Price == null).ToList();
         var nullPriceQuery = (from v in vehicles
-                         where v.Price == null
-                         select v).ToList();
+                             where v.Price == null
+                             select v).ToList();
 
         Display(nullPrice);
         Console.WriteLine();
@@ -137,11 +135,11 @@ class Program
 
         //  Find the average price of vehicles in each brand.
         var avgPrice = groupedVehicles
-            .Select(group => new
-            {
-                Brand = group.Key,
-                AveragePrice = group.Where(v => v.Price != null).Any() ? group.Where(v => v.Price != null).Average(v => v.Price) : 0
-            }).ToList();
+                            .Select(group => new
+                            {
+                                Brand = group.Key,
+                                AveragePrice = group.Where(v => v.Price != null).Any() ? group.Where(v => v.Price != null).Average(v => v.Price) : 0
+                            }).ToList();
         var avgPricesQuery = (from v in groupedVehiclesQuery
                               select new
                               {
@@ -155,15 +153,12 @@ class Program
         Console.WriteLine();
 
         //  Find the brand with the highest number of vehicles.
-        var brandCount = brandCarCount.Max(v => v.Count);
-        var brandCountQuery = brandCarCountQuery.Max(v => v.Count);
-
-
-        var brandWithMaxCount = brandCarCount.Where(v => v.Count == brandCount).ToList();
-        var brandWithMaxCountQuery = (from v in brandCarCount
-                                where v.Count == brandCountQuery
-                                select v).ToList();
-
+        var brandWithMaxCount = brandCarCount
+                                    .Where(v => v.Count == brandCarCount.Max(v => v.Count))
+                                    .ToList();
+        var brandWithMaxCountQuery = (from v in brandCarCountQuery
+                                     where v.Count == brandCarCount.Max(v => v.Count)
+                                     select v).ToList();
 
         Display(brandWithMaxCount);
         Console.WriteLine();
@@ -171,3 +166,35 @@ class Program
         Console.WriteLine();
     }
 }
+
+//  Find the brand with the highest number of vehicles.
+//var brandCount = brandCarCount.Max(v => v.Count);
+//var brandCountQuery = brandCarCountQuery.Max(v => v.Count);
+
+//var brandWithMaxCount = brandCarCount.Where(v => v.Count == brandCount).ToList();
+//var brandWithMaxCountQuery = (from v in brandCarCount
+//                        where v.Count == brandCountQuery
+//                        select v).ToList();
+
+//var brandWithMaxCountQuery = (from v in brandCarCountQuery
+//                              where v.Count == brandCarCount.Max(v => v.Count)
+//                              select v).ToList();
+//var vehiclesSorted = vehicles.OrderByDescending(v => v.Price);
+//var vehiclesSortedQuery = (from v in vehicles
+//                           orderby v.Price
+//                           select v).ToList();
+
+//  Find the vehicle with the highest and lowest price.
+//var highestPriceVehicle = vehiclesSorted.First();
+//Console.WriteLine(highestPriceVehicle);
+
+//var lowestPriceVehicle = vehiclesSorted.Last();
+//Console.WriteLine(lowestPriceVehicle);
+//Console.WriteLine();
+
+//var highestPriceVehicleQuery = vehiclesSortedQuery.First();
+//Console.WriteLine(highestPriceVehicle);
+
+//var lowestPriceVehicleQuery = vehiclesSortedQuery.Last();
+//Console.WriteLine(lowestPriceVehicle);
+//Console.WriteLine();

@@ -2,11 +2,11 @@
 {
     public class Vehicle
     {
-        public int Id;
-        public string Model;
-        public string Brand;
-        public double? Price;
-        public List<string> FuelTypes;
+        public int Id { get; set; }
+        public string Model { get; set; }
+        public string Brand { get; set; }
+        public double? Price { get; set; }
+        public List<string> FuelTypes { get; set; }
 
         public Vehicle(int id, string model, string brand, double? price, List<string> fuelTypes)
         {
