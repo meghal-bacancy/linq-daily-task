@@ -24,13 +24,6 @@ Write LINQ Queries(Using Method & Query syntax) to Solve the Following:
 ![day1_2](/img/day1_2.png)
 
 ## Day 2
-Create a class named Vehicle with the following properties:
-  - Id (int)
-  - Model (string)
-  - Brand (string)
-  - Price (nullable double)
-  - FuelTypes (List<string>)
-
 Create a Static List of Vehicles(Method which returns list of Vehicles) and populate at least 20 Vehicle.
 
 Write LINQ Queries(Using Method & Query syntax) to Solve the Following:
