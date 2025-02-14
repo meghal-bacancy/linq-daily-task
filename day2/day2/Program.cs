@@ -170,9 +170,9 @@ class Program
         Display(distinctDepartments);
         Display(distinctDepartmentsQuery);
 
+        // Get a combined list of months from two different salary collections.
         List<Salary> SalariesSecond = Salary.GetSalariesSecond();
 
-        // Get a combined list of months from two different salary collections.
         var SalaryUnion = (Salaries.Select(s => s.Month)).Union(SalariesSecond.Select(s => s.Month)).ToList();
         var SalaryUnionQuery = (from s in Salaries select s.Month).Union(from s in SalariesSecond select s.Month).ToList();
         Display(SalaryUnion);
@@ -197,6 +197,11 @@ class Program
         Display(UniqueNameQuery);
 
         // Create a LINQ query that retrieves employees from a collection and demonstrate deferred execution and immediate execution
-        // Implement an example that simulates lazy vs.eager loading using LINQ queries.
+        // Implement an example that simulates - using LINQ queries.
+        var deferredExecution = employees.Where(e => e.EmployeeId > 15);
+        var immediateExecution = employees.Where(e => e.EmployeeId > 15).ToList();
+        employees.Add(new Employee { EmployeeId = 19, Name = "Becky", Department = "IT" });
+        Display(deferredExecution.ToList());
+        Display(immediateExecution);
     }
 }
