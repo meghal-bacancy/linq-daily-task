@@ -45,3 +45,5 @@ Write LINQ Queries(Using Method & Query syntax) to Solve the Following:
 
 ![day2_1](/img/day2_1.png)
 ![day2_2](/img/day2_2.png)
+![day2_3](/img/day2_3.png)
+![day2_4](/img/day2_4.png)
